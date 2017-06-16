@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+
+    <style type="text/css">
+    *{
+        margin:0 auto;
+        padding:0;
+    }
+    body{
+        font-family: "微软雅黑";
+        font-size: 14px;
+        color: #333;
+    }
+    .list{
+        margin-top: 10px;
+        line-height: 30px;
+        border-top: 1px solid #eee;
+        border-right: 1px solid #eee;
+    }
+    .list tr.first{
+        font-weight: bold;
+    }
+    .list tr.first td{
+        border-bottom: 2px solid #ddd;
+    }
+    .list td{
+        border-bottom: 1px solid #ddd;
+        border-left: 1px solid #ddd;
+        text-align: center;
+        padding: 10px;
+    }
+    </style>
+</head>
+<body>
+
+
+
+    <!--
+    <table class="list" id="tableData" cellpadding="0" cellspacing="0">
+        <tr class="first">
+            <td>工号</td>
+            <td>名字</td>
+            <td>手机号码</td>
+            <td>职位</td>
+            <td>入职日期</td>
+            <td>邮箱</td>
+         </tr>
+    </table>  
+    -->
+
+
+
+<!-- HTML自定义模版 
+<script type="text/template" id="templs">
+     <tr class="first">
+        <td>{{number}}</td>
+        <td>{{nickname}}</td>
+        <td>{{phone}}</td>
+        <td>{{department}}</td>
+        <td>{{start_date}}</td>
+        <td>{{email}}</td>
+     </tr>
+</script>
+-->
+
+<!--
+arguments:参数个数
+
+语法解析：for、if、数组遍历、对象遍历、
+    //判断语法：创建多个方法、调用相应的方法（for循环过多的时候）
+    
+-->
+<!--
+    前端语法
+    不知道语法解析、正确性
+    错误机制：JS提供（浏览器）
+    动态创建方法：解析模版   function  Function(构造器)
+    模版是文本（字符串）转化：
+    动态函数：
+-->
+<script type="text/template" id="template">
+    <ul>
+        <% for(var i in obj){ %>
+            <li><%= obj[i].text %>:<%= obj[i].status %></li>
+        <% } %>
+    </ul>
+</script>
+
+<div id="list"></div>
+
+<script type="text/javascript" src="jquery-3.2.0.js"></script>
+<script type="text/javascript" src="myTemplate.js"></script>
+<script type="text/javascript">
+/*
+    new Vue({// 处理业务逻辑
+        el: "#app",//元素
+        data:{//数据
+    
+        }
+    });
+ */
+
+/*
+var matcher = /<%=([\s\S]+?)%>|<%([\s\S]+?)%>|$/g;//匹配有等于号和没有等于号的语法
+var escaper = /\\|'|\r|\n|\t|\u2028|\u2029/g;//正则替换特殊符号
+var escapes = {
+    "'":"'",
+    "\\":"\\",
+    "\r":"r",
+    "\n":"n",
+    "\t":"t",
+    "\u2028":"u2028",
+    "\u2029":"u2029",
+}
+
+var template = function(text, data){//模版渲染  模版，数据
+    var index = 0;//记录扫描位置
+    //创建的方法只是带有语法，而本身还是字符串
+    var funcion_main = "var temp = '';";
+    funcion_main += "temp += '";
+    
+    text.replace(matcher,function(match, interpolate,evaluate,offset){
+        funcion_main += text.slice(index, offset).replace(escaper,function(match){
+            return '\\' + escapes[match];
+        });
+        if(evaluate){
+            funcion_main += "';" + evaluate + "temp += '";
+        }
+        if(interpolate){
+            funcion_main += "' + " + interpolate + " + '";
+        }
+        index = offset + match.length;//得到一个新的位置
+        return match;
+    });
+    funcion_main += "';return temp;";
+    // console.log(funcion_main);
+    var render = new Function('obj',funcion_main);
+    return render(data);
+}
+
+
+
+var text = document.getElementById("template").innerHTML;//模版
+var items = [//数据
+    {text:"Java",status:"1"},
+    {text:"Python",status:"2"},
+    {text:"Flex",status:"3"},
+    {text:"Android",status:"4"}
+];
+
+document.getElementById("list").innerHTML = template(text,items);
+*/
+
+
+var  myTemplate = new MyTemple({
+    el: "list",
+    tem : "template",
+    data: [
+        {text:"Java",status:"1"},
+        {text:"Python",status:"2"},
+        {text:"Flex",status:"3"},
+        {text:"Android",status:"4"}
+    ]
+});
+
+/*
+     function formatTemplate(dta,template){//解析模版  数据，模版
+        return template.replace(/{{(\w+)}}/g,function(t1,t2){// 处理单条数据
+            // console.log(t1,t2);
+            if(!t2){
+                return "";
+            }
+            return dta[t2];//dta:传入的数据
+        });
+     }
+
+     $.ajax({
+         url: 'test.json',
+         type: 'get',
+         dateType: 'json',
+         success: function(data){
+
+            var data = JSON.parse(data);
+            
+            if(!data.success){
+                
+                return;
+            }
+
+            var html = $("#template").html();// 模版
+            var dataHtml = "";
+            $.each(data.data, function(index, val) {
+                dataHtml += formatTemplate(val,html);
+            });
+
+            $("#tableData").append(dataHtml);
+
+         }
+
+     });
+*/   
+
+</script>
+
+</body>
+</html>
