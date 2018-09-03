@@ -51,7 +51,7 @@
 
 ## Map
 
-<div align="center"> <img src="../pics//SoWkIImgAStDuUBAp2j9BKfBJ4vLy4q.png"/> </div><br>
+<div align="center"> <img src="./Map.png"/> </div><br>
 
 - TreeMap：基于红黑树实现。
 
@@ -66,7 +66,7 @@
 
 ## 迭代器模式
 
-<div align="center"> <img src="../pics//SoWkIImgAStDuUBAp2j9BKfBJ4vLy0G.png"/> </div><br>
+<div align="center"> <img src="./Iterator.png"/> </div><br>
 
 Collection 实现了 Iterable 接口，其中的 iterator() 方法能够产生一个 Iterator 对象，通过这个对象就可以迭代遍历 Collection 中的元素。
 
@@ -106,8 +106,6 @@ List list = Arrays.asList(1,2,3);
 # 三、源码分析
 
 如果没有特别说明，以下源码分析基于 JDK 1.8。
-
-在 IDEA 中 double shift 调出 Search EveryWhere，查找源码文件，找到之后就可以阅读源码。
 
 ## ArrayList
 
@@ -325,7 +323,7 @@ List<String> list = new CopyOnWriteArrayList<>();
 
 写操作需要加锁，防止并发写入时导致写入数据丢失。
 
-写操作结束之后需要把原始数组指向新的复制数组。
+写操作结束之后需要把原始数组的引用指向新的复制数组。
 
 ```java
 public boolean add(E e) {
@@ -387,7 +385,7 @@ transient Node<E> first;
 transient Node<E> last;
 ```
 
-<div align="center"> <img src="../pics//49495c95-52e5-4c9a-b27b-92cf235ff5ec.png" width="500"/> </div><br>
+<div align="center"> <img src="./双向链表.png" width="500"/> </div><br>
 
 ### 2. 与 ArrayList 的比较
 
