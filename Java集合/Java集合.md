@@ -25,7 +25,7 @@
 
 ## Collection
 
-<div align="center"> <img src="/Collection.png"/> </div><br>
+<div align="center"> <img src="./Collection.png"/> </div><br>
 
 ### 1. Set
 
