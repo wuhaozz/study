@@ -635,7 +635,7 @@ static int indexFor(int h, int length) {
 
 在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h >>> 16)，主要是从速度、功效、质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。
 
-<div align="center"> <img src="../pics/HashMap的hash算法-1.8.png" width="600"/> </div><br>
+<div align="center"> <img src="./pics/HashMap的hash算法-1.8.png" width="600"/> </div><br>
 
 ### 5. 扩容-基本原理
 
@@ -776,6 +776,8 @@ static final int tableSizeFor(int cap) {
 - HashMap 可以插入键为 null 的 Entry。
 - HashMap 的迭代器是 fail-fast 迭代器。
 - HashMap 不能保证随着时间的推移 Map 中的元素次序是不变的。
+
+<div align="center"> <img src="./pics/HashMap之put方法执行流程图.png" width="600"/> </div><br>
 
 ## ConcurrentHashMap
 
