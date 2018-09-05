@@ -25,7 +25,7 @@
 
 ## Collection
 
-<div align="center"> <img src="./Collection.png"/> </div><br>
+<div align="center"> <img src="./pics/Collection.png"/> </div><br>
 
 ### 1. Set
 
@@ -51,7 +51,7 @@
 
 ## Map
 
-<div align="center"> <img src="./Map.png"/> </div><br>
+<div align="center"> <img src="./pics/Map.png"/> </div><br>
 
 - TreeMap：基于红黑树实现。
 
@@ -66,7 +66,7 @@
 
 ## 迭代器模式
 
-<div align="center"> <img src="./Iterator.png"/> </div><br>
+<div align="center"> <img src="./pics/Iterator.png"/> </div><br>
 
 Collection 实现了 Iterable 接口，其中的 iterator() 方法能够产生一个 Iterator 对象，通过这个对象就可以迭代遍历 Collection 中的元素。
 
@@ -385,7 +385,7 @@ transient Node<E> first;
 transient Node<E> last;
 ```
 
-<div align="center"> <img src="./双向链表.png" width="500"/> </div><br>
+<div align="center"> <img src="./pics/双向链表.png" width="500"/> </div><br>
 
 ### 2. 与 ArrayList 的比较
 
@@ -407,7 +407,7 @@ transient Entry[] table;
 
 Entry 存储着键值对。它包含了四个字段，从 next 字段我们可以看出 Entry 是一个链表。即数组中的每个位置被当成一个桶，一个桶存放一个链表。HashMap 使用拉链法来解决冲突，同一个链表中存放哈希值相同的 Entry。
 
-<div align="center"> <img src="../pics//8fe838e3-ef77-4f63-bf45-417b6bc5c6bb.png" width="600"/> </div><br>
+<div align="center"> <img src="./pics/HashMap数据结构.png" width="600"/> </div><br>
 
 ```java
 static class Entry<K,V> implements Map.Entry<K,V> {
@@ -483,7 +483,7 @@ map.put("K3", "V3");
 - 计算键值对所在的桶；
 - 在链表上顺序查找，时间复杂度显然和链表的长度成正比。
 
-<div align="center"> <img src="../pics//49d6de7b-0d0d-425c-9e49-a1559dc23b10.png" width="600"/> </div><br>
+<div align="center"> <img src="../pics/拉链法的工作原理.png" width="600"/> </div><br>
 
 ### 3. put 操作
 
@@ -633,6 +633,10 @@ static int indexFor(int h, int length) {
 }
 ```
 
+在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h >>> 16)，主要是从速度、功效、质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。
+
+<div align="center"> <img src="../pics/HashMap的hash算法-1.8.png" width="600"/> </div><br>
+
 ### 5. 扩容-基本原理
 
 设 HashMap 的 table 长度为 M，需要存储的键值对数量为 N，如果哈希函数满足均匀性的要求，那么每条链表的长度大约为 N/M，因此平均查找次数的复杂度为 O(N/M)。
@@ -684,6 +688,7 @@ void resize(int newCapacity) {
     Entry[] oldTable = table;
     int oldCapacity = oldTable.length;
     if (oldCapacity == MAXIMUM_CAPACITY) {
+        // 超过最大值就不再扩充
         threshold = Integer.MAX_VALUE;
         return;
     }
@@ -819,7 +824,7 @@ final Segment<K,V>[] segments;
 static final int DEFAULT_CONCURRENCY_LEVEL = 16;
 ```
 
-<div align="center"> <img src="../pics//3fdfc89d-719e-4d93-b518-29fa612b3b18.png"/> </div><br>
+<div align="center"> <img src="./pics/Segment.png"/> </div><br>
 
 ### 2. size 操作
 
