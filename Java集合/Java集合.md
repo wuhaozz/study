@@ -806,12 +806,24 @@ static final class Segment<K,V> extends ReentrantLock implements Serializable {
 
     transient volatile HashEntry<K,V>[] table;
 
+    /** 
+     * 在本 segment 范围内，包含的 HashEntry 元素的个数
+     */
     transient int count;
 
+    /** 
+     * table 被更新的次数
+     */
     transient int modCount;
 
+    /** 
+     * 当 table 中包含的 HashEntry 元素的个数超过本变量值时，触发 table 的再散列
+     */ 
     transient int threshold;
 
+    /** 
+     * 负载因子
+     */
     final float loadFactor;
 }
 ```
@@ -1186,7 +1198,6 @@ ListIterator <-- List
 
 # 参考资料
 
-- Eckel B. Java 编程思想 [M]. 机械工业出版社, 2002.
 - [Java Collection Framework](https://www.w3resource.com/java-tutorial/java-collections.php)
 - [Iterator 模式](https://openhome.cc/Gossip/DesignPattern/IteratorPattern.htm)
 - [Java 8 系列之重新认识 HashMap](https://tech.meituan.com/java_hashmap.html)
